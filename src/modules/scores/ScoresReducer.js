@@ -7,8 +7,6 @@ const ScoresReducer = (state = List(), action) => {
       return state.push(
         Map(action.data)
       );
-      case SCORES_ACTIONS.GET_SCORES:
-        return List(action.data);
     default:
       return state
   }

@@ -1,13 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux-immutable';
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import ScoresReducer from 'modules/scores/ScoresReducer';
+import { reducer as FormReducer } from 'redux-form';
 
 const reducer = combineReducers({
-  scores: ScoresReducer
+  scores: ScoresReducer,
+  form: FormReducer
 });
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(logger));
 
 export default store;

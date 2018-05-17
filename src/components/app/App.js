@@ -1,49 +1,22 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { addScore, getScores } from 'modules/scores/ScoresActions';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import ScoreForm from 'components/score/ScoreForm';
+import ScoresList from 'components/score/ScoresList';
 
-import 'components/app/App.css';
-
-class App extends Component {
-
-  componentDidMount(){
-    this.props.getScores();
-  }
-
-  componentDidUpdate(){
-    console.log(this.props.scores)
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={this._addScore.bind(this)}>Add</button>
-      </div>
-    );
-  }
-
-  _addScore(){
-    const score = {
-      game: 'Poker'
-    }
-
-    return this.props.addScore(score)
-  }
-}
+const  App = props => (
+  <Router>
+    <Fragment>
+      <Link to='/'>View Scores</Link>
+      <Link to='/add'>Add Score</Link>
+      <Route exact path='/' render={() => <ScoresList scores={props.scores}/>}/>
+      <Route path='/add' component={ScoreForm}/>
+    </Fragment>
+  </Router>
+);
 
 const mapStateToProps = state => ({
   scores: state.get('scores')
 });
 
-const mapDispatchToProps = {
-  addScore,
-  getScores
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
