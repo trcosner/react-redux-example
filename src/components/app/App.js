@@ -41,9 +41,9 @@ const mapStateToProps = state => ({
   scores: state.get('scores')
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  addScore: (score) => dispatch(addScore(score)),
-  getScores: () => dispatch(getScores())
-});
+const mapDispatchToProps = {
+  addScore,
+  getScores
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
